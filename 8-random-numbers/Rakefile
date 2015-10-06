@@ -1,0 +1,10 @@
+$LOAD_PATH << "lib"
+require "random_numbers"
+
+require "rspec/core/rake_task"
+
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
+
+task question: Question1.find_k_and_c
