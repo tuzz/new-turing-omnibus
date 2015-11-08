@@ -1,0 +1,3 @@
+[submodule "27-perceptrons/vendor/raw-image"]
+	path = 27-perceptrons/vendor/raw-image
+	url = git@github.com:tuzz/raw-image.git

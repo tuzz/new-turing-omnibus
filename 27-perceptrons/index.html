@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Perceptrons</title>
+    <script src="bin/perceptrons.js"></script>
+  </head>
+  <body>
+    <center>
+      <h1>The New Turing Ombibus: Perceptrons</h1>
+      <canvas width="980" height="540" id="canvas"></canvas>
+    </center>
+
+    <script>
+      var canvas = document.getElementById("canvas");
+      var perceptrons = new Perceptrons(canvas);
+
+      perceptrons.run();
+    </script>
+  </body>
+</html>
