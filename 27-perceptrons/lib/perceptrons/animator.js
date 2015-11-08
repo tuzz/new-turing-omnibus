@@ -1,15 +1,16 @@
 "use strict";
 
-var Animator = function (retina) {
+var RandomAnimator = require("./animator/randomAnimator");
+
+var Animator = function (retina, mode) {
   var self = this;
 
-  self.nextFrame = function () {
-    var x = Math.floor(Math.random() * retina.width);
-    var y = Math.floor(Math.random() * retina.height);
-    var dark = retina.get({ x: x, y: y });
+  if (mode === "random") {
+    self.animator = new RandomAnimator(retina);
+  }
 
-    dark = 1 - dark;
-    retina.set({ x: x, y: y, dark: dark });
+  self.nextFrame = function () {
+    self.animator.nextFrame();
   };
 };
 

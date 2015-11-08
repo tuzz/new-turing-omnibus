@@ -6,10 +6,10 @@ var View = require("./perceptrons/view");
 var Animator = require("./perceptrons/animator");
 var _ = require("underscore");
 
-var Perceptrons = function (canvas) {
+var Perceptrons = function (canvas, animationMode) {
   var self = this;
   var retina = new Retina({ width: 98, height: 54 });
-  var animator = new Animator(retina);
+  var animator = new Animator(retina, animationMode);
   var perceptrons = [];
 
   for (var y = 0; y < 9; y += 1) {

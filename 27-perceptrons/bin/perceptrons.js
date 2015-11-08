@@ -7,10 +7,10 @@ var View = require("./perceptrons/view");
 var Animator = require("./perceptrons/animator");
 var _ = require("underscore");
 
-var Perceptrons = function (canvas) {
+var Perceptrons = function (canvas, animationMode) {
   var self = this;
   var retina = new Retina({ width: 98, height: 54 });
-  var animator = new Animator(retina);
+  var animator = new Animator(retina, animationMode);
   var perceptrons = [];
 
   for (var y = 0; y < 9; y += 1) {
@@ -59,10 +59,29 @@ if (typeof window !== "undefined") {
   window.Perceptrons = module.exports;
 }
 
-},{"./perceptrons/animator":2,"./perceptrons/perceptron":4,"./perceptrons/retina":6,"./perceptrons/view":7,"underscore":8}],2:[function(require,module,exports){
+},{"./perceptrons/animator":2,"./perceptrons/perceptron":5,"./perceptrons/retina":7,"./perceptrons/view":8,"underscore":9}],2:[function(require,module,exports){
 "use strict";
 
-var Animator = function (retina) {
+var RandomAnimator = require("./animator/randomAnimator");
+
+var Animator = function (retina, mode) {
+  var self = this;
+
+  if (mode === "random") {
+    self.animator = new RandomAnimator(retina);
+  }
+
+  self.nextFrame = function () {
+    self.animator.nextFrame();
+  };
+};
+
+module.exports = Animator;
+
+},{"./animator/randomAnimator":3}],3:[function(require,module,exports){
+"use strict";
+
+var RandomAnimator = function (retina) {
   var self = this;
 
   self.nextFrame = function () {
@@ -75,9 +94,9 @@ var Animator = function (retina) {
   };
 };
 
-module.exports = Animator;
+module.exports = RandomAnimator;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 var _ = require("underscore");
@@ -103,7 +122,7 @@ var EvidenceWeigher = function (predicates) {
 
 module.exports = EvidenceWeigher;
 
-},{"underscore":8}],4:[function(require,module,exports){
+},{"underscore":9}],5:[function(require,module,exports){
 "use strict";
 
 var EvidenceWeigher = require("./evidenceWeigher");
@@ -143,7 +162,7 @@ var Perceptron = function (retina, topLeft, bottomRight) {
 
 module.exports = Perceptron;
 
-},{"./evidenceWeigher":3,"./predicate":5,"underscore":8}],5:[function(require,module,exports){
+},{"./evidenceWeigher":4,"./predicate":6,"underscore":9}],6:[function(require,module,exports){
 "use strict";
 
 var _ = require("underscore");
@@ -181,7 +200,7 @@ var Predicate = function (retina, support) {
 
 module.exports = Predicate;
 
-},{"underscore":8}],6:[function(require,module,exports){
+},{"underscore":9}],7:[function(require,module,exports){
 "use strict";
 
 var Retina = function (params) {
@@ -226,7 +245,7 @@ var Retina = function (params) {
 
 module.exports = Retina;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 var _ = require("underscore");
@@ -323,7 +342,7 @@ var View = function (params) {
 
 module.exports = View;
 
-},{"underscore":8}],8:[function(require,module,exports){
+},{"underscore":9}],9:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
