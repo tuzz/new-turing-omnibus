@@ -4,11 +4,28 @@
     <meta charset="utf-8">
     <title>Perceptrons</title>
     <script src="bin/perceptrons.js"></script>
-    <style>p { width: 980px; }</style>
+    <style>
+      p {
+        width: 980px;
+      }
+
+      a {
+        color: blue;
+        margin: 10px;
+        font-size: 24px;
+      }
+
+      canvas {
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
     <center>
       <h1>The New Turing Omnibus: Perceptrons</h1>
+      <a href="?animation=random">random</a>
+      <a href="?animation=clouds">clouds</a>
+      <br/>
       <canvas width="980" height="540" id="canvas"></canvas>
       <p>
         This is a demonstration of some of the ideas from the Perceptrons
@@ -21,6 +38,7 @@
 
     <script>
       var canvas = document.getElementById("canvas");
+      var animationMode = window.location.search.split("=")[1] || "random";
 
       var perceptrons = new Perceptrons({
         canvas: canvas,
@@ -28,7 +46,7 @@
         retinaHeight: 54,
         perceptronWidth: 7,
         perceptronHeight: 6,
-        animationMode: "clouds"
+        animationMode: animationMode
       });
 
       perceptrons.run();

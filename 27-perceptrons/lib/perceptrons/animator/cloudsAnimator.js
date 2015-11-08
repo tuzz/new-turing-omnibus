@@ -87,7 +87,7 @@ var CloudsAnimator = function (retina) {
     { position: { x: 10, y: 37 }, cells: cloudCells, speed: 2 },
     { position: { x: 35, y: 35 }, cells: cloudCells, speed: 2 },
     { position: { x: 60, y: 33 }, cells: cloudCells, speed: 2 },
-    { position: { x: 85, y: 35 }, cells: cloudCells, speed: 2 },
+    { position: { x: 85, y: 35 }, cells: cloudCells, speed: 2 }
   ];
 
   self.nextFrame = function () {
