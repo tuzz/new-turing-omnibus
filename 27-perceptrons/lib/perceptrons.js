@@ -52,7 +52,7 @@ var Perceptrons = function (params) {
       });
       view.update();
       render();
-    });
+    }, 100);
   };
 
   var render = function () {

@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <title>Perceptrons</title>
     <script src="bin/perceptrons.js"></script>
+    <style>p { width: 980px; }</style>
   </head>
   <body>
     <center>
       <h1>The New Turing Omnibus: Perceptrons</h1>
       <canvas width="980" height="540" id="canvas"></canvas>
+      <p>
+        This is a demonstration of some of the ideas from the Perceptrons
+        chapter in the New Turing Omnibus. This animated scene is being viewed
+        on a retina observed by some perceptrons. These perceptrons check
+        whether the input pattern contains disjoint rectangles. If it does, this
+        is shown in green.
+      </p>
     </center>
 
     <script>
@@ -20,7 +28,7 @@
         retinaHeight: 54,
         perceptronWidth: 7,
         perceptronHeight: 6,
-        animationMode: "random"
+        animationMode: "clouds"
       });
 
       perceptrons.run();
