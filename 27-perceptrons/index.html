@@ -7,13 +7,21 @@
   </head>
   <body>
     <center>
-      <h1>The New Turing Ombibus: Perceptrons</h1>
+      <h1>The New Turing Omnibus: Perceptrons</h1>
       <canvas width="980" height="540" id="canvas"></canvas>
     </center>
 
     <script>
       var canvas = document.getElementById("canvas");
-      var perceptrons = new Perceptrons(canvas, "random");
+
+      var perceptrons = new Perceptrons({
+        canvas: canvas,
+        retinaWidth: 98,
+        retinaHeight: 54,
+        perceptronWidth: 7,
+        perceptronHeight: 6,
+        animationMode: "random"
+      });
 
       perceptrons.run();
     </script>
