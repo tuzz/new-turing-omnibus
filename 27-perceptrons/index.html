@@ -9,7 +9,7 @@
         width: 980px;
       }
 
-      a {
+      .animation-link {
         color: blue;
         margin: 10px;
         font-size: 24px;
@@ -18,13 +18,17 @@
       canvas {
         margin-top: 20px;
       }
+
+      #github {
+        color: blue;
+      }
     </style>
   </head>
   <body>
     <center>
       <h1>The New Turing Omnibus: Perceptrons</h1>
-      <a href="?animation=random">random</a>
-      <a href="?animation=clouds">clouds</a>
+      <a class="animation-link" href="?animation=random">random</a>
+      <a class="animation-link" href="?animation=clouds">clouds</a>
       <br/>
       <canvas width="980" height="540" id="canvas"></canvas>
       <p>
@@ -34,6 +38,7 @@
         whether the input pattern contains disjoint rectangles. If it does, this
         is shown in green.
       </p>
+      <a id="github" href="https://github.com/tuzz/new-turing-omnibus/tree/gh-pages/27-perceptrons">View the code on GitHub</a>
     </center>
 
     <script>
