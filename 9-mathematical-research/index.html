@@ -9,21 +9,39 @@
       canvas {
         border: 5px solid black;
       }
+
+      #container {
+        width: 900px;
+        text-align: center;
+        margin: auto;
+        position: relative;
+      }
+
+      #iterations {
+        position: absolute;
+        top: 75px;
+        left: 15px;
+        font-family: arial;
+        font-size: 24px;
+        color: red;
+      }
     </style>
   </head>
   <body>
-    <center>
+    <div id="container">
       <h1>The New Turing Omnibus: The Mandelbrot Set</h1>
       <canvas id="canvas" width="900" height="600"></canvas>
+      <span id="iterations"></span>
       <p>
       This is a very quick attempt to show the Mandelbrot set under a variable
       number of iterations. The code is <a href="https://github.com/tuzz/new-turing-omnibus/tree/gh-pages/9-mathematical-research">here</a>.
       </p>
-    </center>
+    </div>
 
     <script>
       var canvas = document.getElementById("canvas");
-      var app = new Application(canvas);
+      var iterations = document.getElementById("iterations");
+      var app = new Application(canvas, iterations);
       app.run();
     </script>
   </body>

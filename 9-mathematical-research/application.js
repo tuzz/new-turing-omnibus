@@ -1,4 +1,4 @@
-var Application = function (canvas) {
+var Application = function (canvas, span) {
   var self = this;
   var view = new View(canvas);
   var width = 600;
@@ -10,7 +10,7 @@ var Application = function (canvas) {
     setInterval(function () {
       if (up) {
         iterations += 1;
-        if (iterations == 50) {
+        if (iterations == 51) {
           up = false;
         }
       } else {
@@ -21,6 +21,7 @@ var Application = function (canvas) {
       }
 
       self.draw();
+      span.innerHTML = "Iterations: " + iterations;
     }, 50);
   }
 
