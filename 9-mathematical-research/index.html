@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Mandelbrot Set</title>
+    <script src="view.js"></script>
+    <script src="application.js"></script>
+    <style>
+      canvas {
+        border: 5px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1>The Mandelbrot Set</h1>
+      <canvas id="canvas" width="900" height="600"></canvas>
+      <p>
+      This is a very quick attempt to show the Mandelbrot set under a variable
+      number of iterations.
+      </p>
+    </center>
+
+    <script>
+      var canvas = document.getElementById("canvas");
+      var app = new Application(canvas);
+      app.run();
+    </script>
+  </body>
+</html>
