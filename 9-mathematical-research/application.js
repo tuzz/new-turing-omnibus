@@ -22,7 +22,7 @@ var Application = function (canvas, span) {
 
       self.draw();
       span.innerHTML = "Iterations: " + iterations;
-    }, 50);
+    }, 100);
   }
 
   self.draw = function () {
