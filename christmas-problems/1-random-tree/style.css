@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+}
+
+.container {
+  display: inline-block;
+  margin: 10px;
+}
+
+canvas {
+  border: 1px solid black;
+}

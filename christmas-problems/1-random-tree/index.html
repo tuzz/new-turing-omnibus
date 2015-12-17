@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Random Tree</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Source</h2>
+      <canvas id="source"></canvas>
+    </div>
+
+    <div class="container">
+      <h2>Target</h2>
+      <canvas id="target"></canvas>
+    </div>
+
+    <script>
+      var app = new Application({
+        sourceId: "source",
+        targetId: "target",
+        imageName: "tree.jpg"
+      });
+
+      app.run();
+    </script>
+  </body>
+</html>
