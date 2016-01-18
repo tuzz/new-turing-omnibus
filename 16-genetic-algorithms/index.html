@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Genetic Algorithms</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <script src="script.js"></script>
+    <style>
+      .pane {
+        float: left;
+        border: 1px solid black;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        margin: 0.5em;
+      }
+
+      p {
+        margin-left: 0.75em;
+        margin-bottom: 1em;
+      }
+
+      a {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="pane">
+      <h1>Genetic Algorithms: Shortest Path</h1>
+
+      <p>
+        <span>Set the speed:</span>
+        <a href="?speed=fast">fast</a>
+        <a href="?speed=normal">normal</a>
+        <a href="?speed=slow">slow</a>
+      </p>
+
+      <p>
+        <span>Set the node count:</span>
+        <a href="?nodes=6">6</a>
+        <a href="?nodes=10">10</a>
+        <a href="?nodes=16">16</a>
+        <a href="?nodes=26&speed=fast">(26 fast)</a>
+      </p>
+
+      <p>View the code <a href="https://github.com/tuzz/new-turing-omnibus/tree/gh-pages/16-genetic-algorithms">here</a></p>
+    </span>
+
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+    <canvas class="pane"></canvas>
+
+    <script>
+      var app = new GeneticAlgorithms();
+      app.run();
+    </script>
+  </body>
+</html>
