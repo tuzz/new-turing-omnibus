@@ -351,4 +351,24 @@ var GeneticAlgorithms = function () {
   } else {
     comparator = function (a, b) { return a - b; };
   }
+
+  var controls = document.getElementsByClassName("control");
+
+  // http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object
+  function queryString( obj ) {
+    return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
+  }
+
+  for (var i = 0; i < controls.length; i += 1) {
+    var control = controls[i];
+
+    var key = control.getAttribute("data-key");
+    var value = control.getAttribute("data-value");
+
+    var clone = JSON.parse(JSON.stringify(params));
+    clone[key] = value;
+
+    var query = queryString(clone);
+    control.setAttribute("href", query);
+  }
 };
