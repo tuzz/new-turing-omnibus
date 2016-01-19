@@ -1,6 +1,6 @@
 var GeneticAlgorithms = function () {
   var self = this;
-  var delay, nodes;
+  var delay, nodes, comparator;
   var vertices = [];
   var chromosomes = [];
   var solutions = [];
@@ -311,7 +311,7 @@ var GeneticAlgorithms = function () {
     }
 
     rankedDistances = distances.slice(0);
-    rankedDistances.sort(function(a, b) { return a - b; });
+    rankedDistances.sort(comparator);
   };
 
   // http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter
@@ -342,5 +342,13 @@ var GeneticAlgorithms = function () {
     nodes = 6;
   } else {
     nodes = params.nodes;
+  }
+
+  if (typeof params.algorithm === "undefined") {
+    comparator = function (a, b) { return a - b; };
+  } else if (params.algorithm === "longest") {
+    comparator = function (a, b) { return b - a; };
+  } else {
+    comparator = function (a, b) { return a - b; };
   }
 };
