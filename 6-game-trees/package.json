@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "devDependencies": {
+    "jasmine": "^2.3.2",
+    "browserify": "^13.0.0"
+  }
+}
