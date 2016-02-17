@@ -11,7 +11,8 @@ describe("TreeGenerator", function () {
       ["_", "X", "O"]
     ]);
 
-    var node = DescribedClass.generate(board);
+    var tree = DescribedClass.generate(board);
+    var node = tree.root;
 
     expect(node.position).toEqual(board);
     expect(node.children.length).toEqual(2);

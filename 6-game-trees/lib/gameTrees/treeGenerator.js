@@ -1,11 +1,17 @@
 "use strict";
 
+var Tree = require("./tree");
 var Node = require("./node");
 
 var TreeGenerator = function () {
   var self = this;
 
   self.generate = function (board) {
+    var root = generateNode(board);
+    return new Tree(root);
+  };
+
+  var generateNode = function (board) {
     var node = new Node(board);
 
     var blanks = blankSquares(board);
@@ -13,7 +19,7 @@ var TreeGenerator = function () {
     var boards = createBoards(board, blanks, symbol);
 
     for (var i = 0; i < boards.length; i += 1) {
-      node.addChild(self.generate(boards[i]));
+      node.addChild(generateNode(boards[i]));
     }
 
     return node;
