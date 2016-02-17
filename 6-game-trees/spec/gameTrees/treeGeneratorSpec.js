@@ -13,19 +13,19 @@ describe("TreeGenerator", function () {
 
     var node = DescribedClass.generate(board);
 
-    expect(node.value).toEqual(board);
+    expect(node.position).toEqual(board);
     expect(node.children.length).toEqual(2);
 
     var firstChild = node.children[0];
     var secondChild = node.children[1];
 
-    expect(firstChild.value.equal(new Board([
+    expect(firstChild.position.equal(new Board([
       ["X", "O", "X"],
       ["O", "O", "X"],
       ["_", "X", "O"]
     ]))).toEqual(true);
 
-    expect(secondChild.value.equal(new Board([
+    expect(secondChild.position.equal(new Board([
       ["X", "O", "X"],
       ["O", "_", "X"],
       ["O", "X", "O"]
@@ -37,13 +37,13 @@ describe("TreeGenerator", function () {
     var firstGrandchild = firstChild.children[0];
     var secondGrandchild = secondChild.children[0];
 
-    expect(firstGrandchild.value.equal(new Board([
+    expect(firstGrandchild.position.equal(new Board([
       ["X", "O", "X"],
       ["O", "O", "X"],
       ["X", "X", "O"]
     ]))).toEqual(true);
 
-    expect(secondGrandchild.value.equal(new Board([
+    expect(secondGrandchild.position.equal(new Board([
       ["X", "O", "X"],
       ["O", "X", "X"],
       ["O", "X", "O"]

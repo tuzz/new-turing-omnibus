@@ -1,9 +1,9 @@
 "use strict";
 
-var Node = function (value) {
+var Node = function (position) {
   var self = this;
 
-  self.value = value;
+  self.position = position;
   self.children = [];
 
   self.addChild = function (child) {

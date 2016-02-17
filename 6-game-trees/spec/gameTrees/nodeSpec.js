@@ -6,11 +6,11 @@ describe("Node", function () {
   var subject;
 
   beforeEach(function () {
-    subject = new DescribedClass("value");
+    subject = new DescribedClass("position");
   });
 
-  it("stores the value on the node", function () {
-    expect(subject.value).toEqual("value");
+  it("stores the position on the node", function () {
+    expect(subject.position).toEqual("position");
   });
 
   it("allows you to add children", function () {
