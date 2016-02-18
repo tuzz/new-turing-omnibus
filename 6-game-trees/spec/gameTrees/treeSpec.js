@@ -16,9 +16,14 @@ describe("Tree", function () {
     grandchild3 = new Node("grandchild3");
     grandchild4 = new Node("grandchild4");
 
-    root.children = [child1, child2];
-    child1.children = [grandchild1, grandchild2];
-    child2.children = [grandchild3, grandchild4];
+    root.addChild(child1);
+    root.addChild(child2);
+
+    child1.addChild(grandchild1);
+    child1.addChild(grandchild2);
+
+    child2.addChild(grandchild3);
+    child2.addChild(grandchild4);
 
     subject = new DescribedClass(root);
   });
@@ -31,5 +36,9 @@ describe("Tree", function () {
     expect(subject.leaves()).toEqual([
       grandchild1, grandchild2, grandchild3, grandchild4
     ]);
+  });
+
+  it("provides access to its depth", function () {
+    expect(subject.depth()).toEqual(2);
   });
 });

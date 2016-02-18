@@ -14,6 +14,18 @@ var Tree = function (root) {
     return memoizedLeaves;
   };
 
+  self.depth = function () {
+    var node = self.leaves()[0];
+    var depth = 0;
+
+    while (node.parent) {
+      depth += 1;
+      node = node.parent;
+    }
+
+    return depth;
+  };
+
   var calculateLeaves = function (node) {
     if (node.children.length === 0) {
       return [node];
