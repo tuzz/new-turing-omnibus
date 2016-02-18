@@ -5,12 +5,13 @@ var MinimaxProcedure = function (tree) {
 
   self.run = function () {
     var leaves = tree.leaves();
-    climbTree(leaves, false);
+    var maximise = tree.depth() % 2 == 1;
+
+    climbTree(leaves, maximise);
   };
 
   var climbTree = function (nodes, maximise) {
-    var uniqueParents = [];
-    var trackedParent = {};
+    var parents = [];
 
     for (var i = 0; i < nodes.length; i += 1) {
       var node = nodes[i];
@@ -26,13 +27,12 @@ var MinimaxProcedure = function (tree) {
         parent.value = node.value;
       }
 
-      if (!trackedParent[parent]) {
-        uniqueParents.push(parent);
-        trackedParent[parent] = true;
+      if (parents.indexOf(parent) === -1) {
+        parents.push(parent);
       }
     }
 
-    climbTree(uniqueParents, !maximise);
+    climbTree(parents, !maximise);
   };
 };
 
