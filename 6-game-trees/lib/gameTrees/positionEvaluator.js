@@ -9,9 +9,9 @@ var PositionEvaluator = function (board, symbol) {
     }
 
     if (won(symbol)) {
-      return 1;
+      return 1 + squaresRemaining();
     } else if (lost(symbol)) {
-      return -1;
+      return -1 - squaresRemaining();
     } else {
       return 0;
     }
@@ -90,15 +90,21 @@ var PositionEvaluator = function (board, symbol) {
   };
 
   var full = function () {
+    return squaresRemaining() === 0;
+  };
+
+  var squaresRemaining = function () {
+    var remaining = 0;
+
     for (var y = 0; y < 3; y += 1) {
       for (var x = 0; x < 3; x += 1) {
         if (board.get(x, y) === "_") {
-          return false;
+          remaining += 1;
         }
       }
     }
 
-    return true;
+    return remaining;
   };
 };
 

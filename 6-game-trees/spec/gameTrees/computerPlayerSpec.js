@@ -38,5 +38,33 @@ describe("ComputerPlayer", function () {
         ["_", "X", "X"]
       ]))).toEqual(true);
     });
+
+    it("prefers to win as quickly as possible", function () {
+      var result = subject.playTurn(new Board([
+        ["X", "O", "O"],
+        ["_", "X", "_"],
+        ["_", "_", "_"]
+      ]));
+
+      expect(result.equal(new Board([
+        ["X", "O", "O"],
+        ["_", "X", "_"],
+        ["_", "_", "X"]
+      ]))).toEqual(true);
+    });
+
+    it("prefers to draw-out losses for as long as possible", function () {
+      var result = subject.playTurn(new Board([
+        ["O", "X", "X"],
+        ["_", "O", "_"],
+        ["_", "_", "_"]
+      ]));
+
+      expect(result.equal(new Board([
+        ["O", "X", "X"],
+        ["_", "O", "_"],
+        ["_", "_", "X"]
+      ]))).toEqual(true);
+    });
   });
 });

@@ -59,4 +59,28 @@ describe("PositionEvaluator", function () {
       expect(DescribedClass.finished(unfinishedBoard)).toEqual(false);
     });
   });
+
+  describe("when the game is finished and there are squares remaining", function () {
+    var finishedBoard;
+
+    beforeEach(function () {
+      finishedBoard = new Board([
+        ["X", "O", "_"],
+        ["X", "O", "_"],
+        ["X", "_", "_"]
+      ]);
+    });
+
+    it("recognises that the game is finished", function () {
+      expect(DescribedClass.finished(finishedBoard)).toEqual(true);
+    });
+
+    it("biases the evaluation towards shorter wins", function () {
+      expect(DescribedClass.evaluate(finishedBoard, "X")).toEqual(5);
+    });
+
+    it("biases the evaluation towards drawn-out loses", function () {
+      expect(DescribedClass.evaluate(finishedBoard, "O")).toEqual(-5);
+    });
+  });
 });
