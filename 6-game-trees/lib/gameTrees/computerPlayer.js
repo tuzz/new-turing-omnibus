@@ -8,12 +8,12 @@ var ComputerPlayer = function (symbol) {
   var self = this;
   var tree;
 
-  self.playTurn = function (position) {
+  self.playTurn = function (position, callback) {
     tree = generateTree(position);
     tree = evaluatePositions(tree);
     tree = runMinimax(tree);
 
-    return bestPosition(tree);
+    callback(bestPosition(tree));
   };
 
   var generateTree = function (position) {
