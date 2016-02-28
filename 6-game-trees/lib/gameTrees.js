@@ -2,9 +2,9 @@
 
 var Game = require("./gameTrees/game");
 var View = require("./gameTrees/view");
-
 var HumanPlayer = require("./gameTrees/humanPlayer");
 var ComputerPlayer = require("./gameTrees/computerPlayer");
+var PositionEvaluator = require("./gameTrees/positionEvaluator");
 
 var GameTrees = function () {
   var self = this;
@@ -26,11 +26,25 @@ var GameTrees = function () {
       view.update();
 
       setTimeout(function () {
-        if (!game.finished()) {
+        if (game.finished()) {
+          displayWinner();
+        } else {
           nextTurn();
         }
       }, 50);
     });
+  };
+
+  var displayWinner = function () {
+    var result = PositionEvaluator.evaluate(game.board, "X");
+
+    if (result > 0) {
+      view.won();
+    } else if (result === 0) {
+      view.drew();
+    } else if (result < 0) {
+      view.lost();
+    }
   };
 };
 

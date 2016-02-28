@@ -5,6 +5,7 @@ var View = function (game, playerCallback) {
 
   var canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
+  var gridColor = "gray";
 
   self.update = function () {
     context.lineWidth = 10;
@@ -16,8 +17,23 @@ var View = function (game, playerCallback) {
     canvas.onmousedown = touch;
   };
 
+  self.won = function () {
+    gridColor = "red";
+    self.update();
+  };
+
+  self.lost = function () {
+    gridColor = "blue";
+    self.update();
+  };
+
+  self.drew = function () {
+    gridColor = "black";
+    self.update();
+  };
+
   var drawGrid = function () {
-    context.strokeStyle = "gray";
+    context.strokeStyle = gridColor;
 
     context.beginPath();
     context.moveTo(125, 0);

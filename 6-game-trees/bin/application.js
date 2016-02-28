@@ -3,9 +3,9 @@
 
 var Game = require("./gameTrees/game");
 var View = require("./gameTrees/view");
-
 var HumanPlayer = require("./gameTrees/humanPlayer");
 var ComputerPlayer = require("./gameTrees/computerPlayer");
+var PositionEvaluator = require("./gameTrees/positionEvaluator");
 
 var GameTrees = function () {
   var self = this;
@@ -27,11 +27,25 @@ var GameTrees = function () {
       view.update();
 
       setTimeout(function () {
-        if (!game.finished()) {
+        if (game.finished()) {
+          displayWinner();
+        } else {
           nextTurn();
         }
       }, 50);
     });
+  };
+
+  var displayWinner = function () {
+    var result = PositionEvaluator.evaluate(game.board, "X");
+
+    if (result > 0) {
+      view.won();
+    } else if (result === 0) {
+      view.drew();
+    } else if (result < 0) {
+      view.lost();
+    }
   };
 };
 
@@ -41,7 +55,7 @@ if (typeof window !== "undefined") {
   window.Application = module.exports;
 }
 
-},{"./gameTrees/computerPlayer":3,"./gameTrees/game":4,"./gameTrees/humanPlayer":5,"./gameTrees/view":11}],2:[function(require,module,exports){
+},{"./gameTrees/computerPlayer":3,"./gameTrees/game":4,"./gameTrees/humanPlayer":5,"./gameTrees/positionEvaluator":8,"./gameTrees/view":11}],2:[function(require,module,exports){
 "use strict";
 
 var Board = function (data) {
@@ -547,6 +561,7 @@ var View = function (game, playerCallback) {
 
   var canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
+  var gridColor = "gray";
 
   self.update = function () {
     context.lineWidth = 10;
@@ -558,8 +573,23 @@ var View = function (game, playerCallback) {
     canvas.onmousedown = touch;
   };
 
+  self.won = function () {
+    gridColor = "red";
+    self.update();
+  };
+
+  self.lost = function () {
+    gridColor = "blue";
+    self.update();
+  };
+
+  self.drew = function () {
+    gridColor = "black";
+    self.update();
+  };
+
   var drawGrid = function () {
-    context.strokeStyle = "gray";
+    context.strokeStyle = gridColor;
 
     context.beginPath();
     context.moveTo(125, 0);
