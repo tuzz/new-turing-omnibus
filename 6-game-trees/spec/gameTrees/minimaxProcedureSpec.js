@@ -233,4 +233,28 @@ describe("MinimaxProcedure", function () {
       expect(root.value).toEqual(1);
     });
   });
+
+  describe("for a tree containing zero values", function () {
+    //              root
+    //             /    \
+    //       child1{0}  child2{-1}
+    beforeEach(function () {
+      root = new Node("root");
+      child1 = new Node("child1");
+      child2 = new Node("child2");
+
+      root.addChild(child1);
+      root.addChild(child2);
+
+      child1.value = 0;
+      child2.value = -1;
+
+      tree = new Tree(root);
+    });
+
+    it("populates the values tree nodes according to minimax", function () {
+      DescribedClass.run(tree);
+      expect(tree.root.value).toEqual(0);
+    });
+  });
 });

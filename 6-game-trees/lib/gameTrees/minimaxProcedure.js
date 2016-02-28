@@ -16,9 +16,9 @@ var MinimaxProcedure = function (tree) {
       var maximise = node.depth() % 2 === 1;
       var parent = node.parent;
 
-      if (!parent) {
+      if (typeof parent === "undefined") {
         continue;
-      } else if (!parent.value) {
+      } else if (typeof parent.value === "undefined") {
         parent.value = node.value;
       } else if (maximise && node.value > parent.value) {
         parent.value = node.value;
