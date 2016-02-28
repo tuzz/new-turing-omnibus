@@ -257,35 +257,29 @@ var MinimaxProcedure = function (tree) {
   var self = this;
 
   self.run = function () {
-    var leaves = tree.leaves();
-    climbTree(leaves);
+    minimax(tree.root);
   };
 
-  var climbTree = function (nodes) {
-    var parents = [];
-
-    for (var i = 0; i < nodes.length; i += 1) {
-      var node = nodes[i];
-      var maximise = node.depth() % 2 === 1;
-      var parent = node.parent;
-
-      if (typeof parent === "undefined") {
-        continue;
-      } else if (typeof parent.value === "undefined") {
-        parent.value = node.value;
-      } else if (maximise && node.value > parent.value) {
-        parent.value = node.value;
-      } else if (!maximise && node.value < parent.value) {
-        parent.value = node.value;
-      }
-
-      if (parents.indexOf(parent) === -1) {
-        parents.push(parent);
-      }
+  var minimax = function (node) {
+    if (typeof node.value !== "undefined") {
+      return;
     }
 
-    if (parents.length !== 0) {
-      climbTree(parents);
+    var maximise = node.depth() % 2 === 0;
+    var children = node.children;
+
+    for (var i = 0; i < children.length; i += 1) {
+      var child = children[i];
+
+      minimax(child);
+
+      if (typeof node.value === "undefined") {
+        node.value = child.value;
+      } else if (maximise && child.value > node.value) {
+        node.value = child.value;
+      } else if (!maximise && child.value < node.value) {
+        node.value = child.value;
+      }
     }
   };
 };

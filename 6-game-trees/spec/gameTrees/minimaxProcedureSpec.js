@@ -257,4 +257,42 @@ describe("MinimaxProcedure", function () {
       expect(tree.root.value).toEqual(0);
     });
   });
+
+  describe("for a tree that exposes a bug", function () {
+    //              root
+    //             /    \
+    //       child1     child2
+    //       /    \        |
+    //    gc1{3}  gc2   gc3{1}
+    //             |
+    //           gr1{2}
+    beforeEach(function () {
+      root = new Node("root");
+      child1 = new Node("child1");
+      child2 = new Node("child2");
+      grandchild1 = new Node("grandchild1");
+      grandchild2 = new Node("grandchild2");
+      grandchild3 = new Node("grandchild3");
+      greatchild1 = new Node("greatchild1");
+
+      root.addChild(child1);
+      root.addChild(child2);
+      child1.addChild(grandchild1);
+      child1.addChild(grandchild2);
+      child2.addChild(grandchild3);
+      grandchild2.addChild(greatchild1);
+
+      grandchild1.value = 3;
+      grandchild3.value = 1;
+
+      greatchild1.value = 2;
+
+      tree = new Tree(root);
+    });
+
+    it("sets the correct value on the root node", function () {
+      DescribedClass.run(tree);
+      expect(tree.root.value).toEqual(2);
+    });
+  });
 });
