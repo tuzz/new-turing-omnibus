@@ -4,7 +4,7 @@ body {
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 .noughts {
@@ -17,5 +17,18 @@ h1 {
 
 canvas {
   cursor: pointer;
-  margin-top: 2em;
+  margin: 1em 0 2em 0;
+}
+
+p {
+  width: 700px;
+  margin: auto;
+  line-height: 1.5em;
+  text-align: left;
+  margin-bottom: 2em;
+}
+
+a {
+  color: blue;
+  padding-bottom: 4em;
 }

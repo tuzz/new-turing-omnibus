@@ -15,6 +15,40 @@
 
     <canvas id="canvas" width="380" height="380"></canvas>
 
+    <p>
+    This is a working example of the Minimax algorithm as described in the Game
+    Trees chapter in the New Turing Omnibus. The computer opponent uses the
+    Minimax algorithm to determine its best possible move. If this has been
+    programmed correctly, you will never win (sorry).
+    </p>
+
+    <p>
+    When the compuer has a choice between multiple "best moves", it prefers to
+    take the move that results in a faster win or a prolonged loss for itself.
+    This is achieved by
+
+    <a href="https://github.com/tuzz/new-turing-omnibus/blob/gh-pages/6-game-trees/lib/gameTrees/positionEvaluator.js#L12">
+    biasing the evaluation
+    </a>
+
+    of positions according to how many squares remain.
+    </p>
+
+    <p>
+    At present, this application does not implement alpha-beta pruning which
+    would significantly reduce the number of comparisons required during the
+    Minimax algorithm. As a result, the first move the computer makes is
+    noticeably slower than subsequent moves.
+    </p>
+
+    <span>
+      Written by Chris Patuzzo,
+    </span>
+
+    <a href="https://github.com/tuzz/new-turing-omnibus/tree/gh-pages/6-game-trees">
+      View the code on GitHub
+    </a>
+
     <script>
       var app = new Application("canvas");
       app.run();
