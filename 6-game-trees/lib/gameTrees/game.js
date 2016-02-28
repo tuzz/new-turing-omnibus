@@ -14,14 +14,18 @@ var Game = function (player1, player2) {
     ["_", "_", "_"]
   ]);
 
-  self.nextTurn = function () {
-    self.board = self.currentPlayer.playTurn(self.board);
+  self.nextTurn = function (callback) {
+    self.currentPlayer.playTurn(self.board, function (board) {
+      self.board = board;
 
-    if (self.currentPlayer === player1) {
-      self.currentPlayer = player2;
-    } else {
-      self.currentPlayer = player1;
-    }
+      if (self.currentPlayer === player1) {
+        self.currentPlayer = player2;
+      } else {
+        self.currentPlayer = player1;
+      }
+
+      callback();
+    });
   };
 
   self.finished = function () {

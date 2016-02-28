@@ -4,11 +4,36 @@ var DescribedClass = require("../../lib/gameTrees/game");
 var Board = require("../../lib/gameTrees/board");
 
 describe("Game", function () {
-  var subject, player1, player2;
+  var subject, player1, player2, p1Board, p2Board;
 
   beforeEach(function () {
-    player1 = { playTurn: function () {} };
-    player2 = { playTurn: function () {} };
+    p1Board = new Board([
+      ["X", "_", "_"],
+      ["_", "_", "_"],
+      ["_", "_", "_"]
+    ]);
+
+    p2Board = new Board([
+      ["O", "_", "_"],
+      ["_", "_", "_"],
+      ["_", "_", "_"]
+    ]);
+
+    player1 = {
+      playTurn: function (board, callback) {
+        setTimeout(function () {
+          callback(p1Board);
+        }, 50);
+      }
+    };
+
+    player2 = {
+      playTurn: function (board, callback) {
+        setTimeout(function () {
+          callback(p2Board);
+        }, 50);
+      }
+    };
 
     subject = new DescribedClass(player1, player2);
   });
@@ -21,68 +46,52 @@ describe("Game", function () {
     ]))).toEqual(true);
   });
 
-  it("asks players to play turns alternately", function () {
-    spyOn(player1, "playTurn");
-    spyOn(player2, "playTurn");
+  it("asks players to play turns alternately", function (done) {
+    subject.nextTurn(function () {
+      expect(subject.board.equal(p1Board));
 
-    subject.nextTurn();
-    expect(player2.playTurn).not.toHaveBeenCalled();
-    player1.playTurn.calls.reset();
-    player2.playTurn.calls.reset();
+      subject.nextTurn(function () {
+        expect(subject.board.equal(p2Board));
 
-    subject.nextTurn();
-    expect(player1.playTurn).not.toHaveBeenCalled();
-    expect(player2.playTurn).toHaveBeenCalled();
-    player1.playTurn.calls.reset();
-    player2.playTurn.calls.reset();
+        subject.nextTurn(function () {
+          expect(subject.board.equal(p1Board));
 
-    subject.nextTurn();
-    expect(player1.playTurn).toHaveBeenCalled();
-    expect(player2.playTurn).not.toHaveBeenCalled();
-    player1.playTurn.calls.reset();
-    player2.playTurn.calls.reset();
+          done();
+        });
+      });
+    });
   });
 
-  it("exposes the player whose turn it is", function () {
+  it("exposes the player whose turn it is", function (done) {
     expect(subject.currentPlayer).toEqual(player1);
 
-    subject.nextTurn();
-    expect(subject.currentPlayer).toEqual(player2);
+    subject.nextTurn(function () {
+      expect(subject.currentPlayer).toEqual(player2);
 
-    subject.nextTurn();
-    expect(subject.currentPlayer).toEqual(player1);
+      subject.nextTurn(function () {
+        expect(subject.currentPlayer).toEqual(player1);
 
-    subject.nextTurn();
-    expect(subject.currentPlayer).toEqual(player2);
+        subject.nextTurn(function () {
+          expect(subject.currentPlayer).toEqual(player2);
+
+          done();
+        });
+      });
+    });
   });
 
-  it("replaces the board from the player taking their turn", function () {
-    var board = new Board([
-      ["X", "_", "_"],
-      ["_", "_", "_"],
-      ["_", "_", "_"]
-    ]);
-
-    player1 = { playTurn: function () { return board; } };
-    subject = new DescribedClass(player1, player2);
-
-    subject.nextTurn();
-    expect(subject.board).toEqual(board);
-  });
-
-  it("allows you to check if the game has finished", function () {
+  it("allows you to check if the game has finished", function (done) {
     expect(subject.finished()).toEqual(false);
 
-    var board = new Board([
+    p1Board = new Board([
       ["X", "O", "_"],
       ["X", "O", "_"],
       ["X", "_", "_"]
     ]);
 
-    player1 = { playTurn: function () { return board; } };
-    subject = new DescribedClass(player1, player2);
-
-    subject.nextTurn();
-    expect(subject.finished()).toEqual(true);
+    subject.nextTurn(function () {
+      expect(subject.finished()).toEqual(true);
+      done();
+    });
   });
 });
