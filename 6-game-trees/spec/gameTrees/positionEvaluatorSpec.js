@@ -33,13 +33,18 @@ describe("PositionEvaluator", function () {
     expect(DescribedClass.evaluate(drawnBoard, "O")).toEqual(0);
   });
 
+  it("recognises that the games have finished", function () {
+    expect(DescribedClass.finished(winningBoard)).toEqual(true);
+    expect(DescribedClass.finished(drawnBoard)).toEqual(true);
+  });
+
   describe("when the game is unfinished", function () {
     var unfinishedBoard;
 
     beforeEach(function () {
       unfinishedBoard = new Board([
-        ["X", "X", "X"],
-        ["O", "_", "O"],
+        ["X", "O", "X"],
+        ["O", "_", "X"],
         ["O", "X", "O"]
       ]);
     });
@@ -48,6 +53,10 @@ describe("PositionEvaluator", function () {
       expect(function () {
         DescribedClass.evaluate(unfinishedBoard, "X");
       }).toThrow();
+    });
+
+    it("recognises that the game is unfinished", function () {
+      expect(DescribedClass.finished(unfinishedBoard)).toEqual(false);
     });
   });
 });

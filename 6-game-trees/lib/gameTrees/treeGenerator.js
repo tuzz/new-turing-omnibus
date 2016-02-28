@@ -2,6 +2,7 @@
 
 var Tree = require("./tree");
 var Node = require("./node");
+var PositionEvaluator = require("./positionEvaluator");
 
 var TreeGenerator = function () {
   var self = this;
@@ -42,6 +43,10 @@ var TreeGenerator = function () {
   };
 
   var createBoards = function (board, blanks, symbol) {
+    if (gameOver(board)) {
+      return [];
+    }
+
     var boards = [];
 
     for (var i = 0; i < blanks.length; i += 1) {
@@ -53,6 +58,10 @@ var TreeGenerator = function () {
     }
 
     return boards;
+  };
+
+  var gameOver = function (board) {
+    return PositionEvaluator.finished(board);
   };
 };
 

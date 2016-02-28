@@ -1,12 +1,10 @@
 "use strict";
 
-var TreeGenerator = require("./treeGenerator");
-
 var PositionEvaluator = function (board, symbol) {
   var self = this;
 
   self.evaluate = function () {
-    if (!finished()) {
+    if (!self.finished()) {
       throw new Error("I'm not smart enough to evaluate unfinished games");
     }
 
@@ -19,6 +17,10 @@ var PositionEvaluator = function (board, symbol) {
     }
   };
 
+  self.finished = function () {
+    return won("X") || lost("X") || drawn("X");
+  };
+
   var won = function (symbol) {
     return wonAnyRow(symbol) || wonAnyColumn(symbol) || wonAnyDiagonal(symbol);
   };
@@ -27,16 +29,8 @@ var PositionEvaluator = function (board, symbol) {
     return won(otherSymbol(symbol));
   };
 
-  var finished = function () {
-    for (var y = 0; y < 3; y += 1) {
-      for (var x = 0; x < 3; x += 1) {
-        if (board.get(x, y) === "_") {
-          return false;
-        }
-      }
-    }
-
-    return true;
+  var drawn = function () {
+    return full() && !(won("X") || lost("X"))
   };
 
   var wonAnyRow = function (symbol) {
@@ -94,10 +88,26 @@ var PositionEvaluator = function (board, symbol) {
   var otherSymbol = function (symbol) {
     return symbol === "X" ? "O" : "X";
   };
+
+  var full = function () {
+    for (var y = 0; y < 3; y += 1) {
+      for (var x = 0; x < 3; x += 1) {
+        if (board.get(x, y) === "_") {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
 };
 
 PositionEvaluator.evaluate = function (board, symbol) {
   return new PositionEvaluator(board, symbol).evaluate();
+};
+
+PositionEvaluator.finished = function (board) {
+  return new PositionEvaluator(board).finished();
 };
 
 module.exports = PositionEvaluator;

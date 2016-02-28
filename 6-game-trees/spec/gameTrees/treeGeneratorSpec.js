@@ -53,4 +53,17 @@ describe("TreeGenerator", function () {
     expect(firstGrandchild.children.length).toEqual(0);
     expect(secondGrandchild.children.length).toEqual(0);
   });
+
+  it("stops generating boards when the game has finished", function () {
+    var board = new Board([
+      ["X", "O", "_"],
+      ["X", "O", "_"],
+      ["X", "_", "_"]
+    ]);
+
+    var tree = DescribedClass.generate(board);
+    var node = tree.root;
+
+    expect(node.children.length).toEqual(0);
+  });
 });
