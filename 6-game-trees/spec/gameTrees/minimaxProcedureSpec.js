@@ -91,4 +91,42 @@ describe("MinimaxProcedure", function () {
       expect(root.value).toEqual(5);
     });
   });
+
+  describe("for a tree with varying depths", function () {
+    //                 root
+    //                /    \
+    //          child1      child2{3}
+    //         /      \
+    // grandchild1{1}   grandchild2{2}
+
+    beforeEach(function () {
+      root = new Node("root");
+      child1 = new Node("child1");
+      child2 = new Node("child2");
+      grandchild1 = new Node("grandchild1");
+      grandchild2 = new Node("grandchild2");
+
+      root.addChild(child1);
+      root.addChild(child2);
+
+      child1.addChild(grandchild1);
+      child1.addChild(grandchild2);
+
+      grandchild1.value = 1;
+      grandchild2.value = 2;
+      child2.value = 3;
+
+      tree = new Tree(root);
+    });
+
+    it("populates the values tree nodes according to minimax", function () {
+      DescribedClass.run(tree);
+
+      expect(grandchild1.value).toEqual(1);
+      expect(grandchild2.value).toEqual(2);
+      expect(child1.value).toEqual(1);
+      expect(child2.value).toEqual(3);
+      expect(root.value).toEqual(3);
+    });
+  });
 });
