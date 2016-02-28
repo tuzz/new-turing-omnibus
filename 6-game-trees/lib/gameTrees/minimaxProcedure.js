@@ -5,16 +5,15 @@ var MinimaxProcedure = function (tree) {
 
   self.run = function () {
     var leaves = tree.leaves();
-    var maximise = tree.depth() % 2 == 1;
-
-    climbTree(leaves, maximise);
+    climbTree(leaves);
   };
 
-  var climbTree = function (nodes, maximise) {
+  var climbTree = function (nodes) {
     var parents = [];
 
     for (var i = 0; i < nodes.length; i += 1) {
       var node = nodes[i];
+      var maximise = node.depth % 2 === 1;
       var parent = node.parent;
 
       if (!parent) {
@@ -32,7 +31,7 @@ var MinimaxProcedure = function (tree) {
       }
     }
 
-    climbTree(parents, !maximise);
+    climbTree(parents);
   };
 };
 

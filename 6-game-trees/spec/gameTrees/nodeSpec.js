@@ -30,4 +30,14 @@ describe("Node", function () {
 
     expect(child.parent).toEqual(subject);
   });
+
+  it("keeps track of the node's depth", function () {
+    expect(subject.depth).toEqual(0);
+
+    var child = new DescribedClass("child");
+    subject.addChild(child);
+
+    expect(subject.depth).toEqual(0);
+    expect(child.depth).toEqual(1);
+  });
 });

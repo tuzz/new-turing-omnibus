@@ -37,8 +37,4 @@ describe("Tree", function () {
       grandchild1, grandchild2, grandchild3, grandchild4
     ]);
   });
-
-  it("provides access to its depth", function () {
-    expect(subject.depth()).toEqual(2);
-  });
 });
