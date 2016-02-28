@@ -19,16 +19,19 @@ var View = function (game, playerCallback) {
 
   self.won = function () {
     gridColor = "red";
+    canvas.style.cursor = "default";
     self.update();
   };
 
   self.lost = function () {
     gridColor = "blue";
+    canvas.style.cursor = "default";
     self.update();
   };
 
   self.drew = function () {
     gridColor = "black";
+    canvas.style.cursor = "default";
     self.update();
   };
 
