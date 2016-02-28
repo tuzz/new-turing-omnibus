@@ -17,7 +17,7 @@ var MinimaxProcedure = function (tree) {
       var parent = node.parent;
 
       if (!parent) {
-        return;
+        continue;
       } else if (!parent.value) {
         parent.value = node.value;
       } else if (maximise && node.value > parent.value) {
@@ -31,7 +31,9 @@ var MinimaxProcedure = function (tree) {
       }
     }
 
-    climbTree(parents);
+    if (parents.length !== 0) {
+      climbTree(parents);
+    }
   };
 };
 

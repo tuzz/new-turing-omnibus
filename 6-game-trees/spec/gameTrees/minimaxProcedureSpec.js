@@ -5,8 +5,9 @@ var Tree = require("../../lib/gameTrees/tree");
 var Node = require("../../lib/gameTrees/node");
 
 describe("MinimaxProcedure", function () {
-  var tree, root, child1, child2,
-    grandchild1, grandchild2, grandchild3, grandchild4;
+  var tree, root, child1, child2, child3,
+    grandchild1, grandchild2, grandchild3, grandchild4,
+    greatchild1, greatchild2, greatchild3;
 
   beforeEach(function () {
     root = new Node("root");
@@ -127,6 +128,109 @@ describe("MinimaxProcedure", function () {
       expect(child1.value).toEqual(1);
       expect(child2.value).toEqual(3);
       expect(root.value).toEqual(3);
+    });
+  });
+
+  describe("for a complex tree", function () {
+    //                 root
+    //               /   |  \
+    //             c1   c2   c3{1}
+    //            / |   | \
+    //       g1{-1} g2 g3  g4
+    //             /    |    \
+    //        gr1{0} gr2{1} gr3{0}
+    beforeEach(function () {
+      root = new Node("root");
+
+      child1 = new Node("c1");
+      child2 = new Node("c2");
+      child3 = new Node("c3");
+
+      grandchild1 = new Node("g1");
+      grandchild2 = new Node("g2");
+      grandchild3 = new Node("g3");
+      grandchild4 = new Node("g4");
+
+      greatchild1 = new Node("gr1");
+      greatchild2 = new Node("gr2");
+      greatchild3 = new Node("gr3");
+
+      root.addChild(child1);
+      root.addChild(child2);
+      root.addChild(child3);
+
+      child1.addChild(grandchild1);
+      child1.addChild(grandchild2);
+      child2.addChild(grandchild3);
+      child2.addChild(grandchild4);
+
+      grandchild2.addChild(greatchild1);
+      grandchild3.addChild(greatchild2);
+      grandchild4.addChild(greatchild3);
+
+      child3.value = 1
+      grandchild1.value = -1;
+      greatchild1.value = 0;
+      greatchild2.value = 1;
+      greatchild3.value = 0;
+
+      tree = new Tree(root);
+    });
+
+    it("populates the values tree nodes according to minimax", function () {
+      DescribedClass.run(tree);
+
+      expect(greatchild1.value).toEqual(0);
+      expect(greatchild2.value).toEqual(1);
+      expect(greatchild3.value).toEqual(0);
+
+      expect(grandchild1.value).toEqual(-1);
+      expect(grandchild2.value).toEqual(0);
+      expect(grandchild3.value).toEqual(1);
+      expect(grandchild4.value).toEqual(0);
+
+      expect(child1.value).toEqual(-1);
+      expect(child2.value).toEqual(0);
+      expect(child3.value).toEqual(1);
+
+      expect(root.value).toEqual(1);
+    });
+  });
+
+  describe("for a tree with a deeply nested branch", function () {
+    //              root
+    //             /    \
+    //       child1{1}  child2
+    //                    |
+    //               grandchild1
+    //                    |
+    //              greatchild1{0}
+    beforeEach(function () {
+      root = new Node("root");
+      child1 = new Node("child1");
+      child2 = new Node("child2");
+      grandchild1 = new Node("grandchild1");
+      greatchild1 = new Node("greatchild1");
+
+      root.addChild(child1);
+      root.addChild(child2);
+      child2.addChild(grandchild1);
+      grandchild1.addChild(greatchild1);
+
+      child1.value = 1;
+      greatchild1.value = 0;
+
+      tree = new Tree(root);
+    });
+
+    it("populates the values tree nodes according to minimax", function () {
+      DescribedClass.run(tree);
+
+      expect(greatchild1.value).toEqual(0);
+      expect(grandchild1.value).toEqual(0);
+      expect(child1.value).toEqual(1);
+      expect(child2.value).toEqual(0);
+      expect(root.value).toEqual(1);
     });
   });
 });
