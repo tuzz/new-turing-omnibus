@@ -10,7 +10,7 @@ test: node_modules
 
 build: node_modules
 	mkdir -p bin
-	browserify lib/gameTrees.js > bin/gameTrees.js
+	browserify lib/gameTrees.js > bin/application.js
 
 node_modules:
 	npm install

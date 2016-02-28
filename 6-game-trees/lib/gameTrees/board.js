@@ -2,6 +2,7 @@
 
 var Board = function (data) {
   var self = this;
+  self.data = data;
 
   self.get = function (x, y) {
     return data[y][x];
