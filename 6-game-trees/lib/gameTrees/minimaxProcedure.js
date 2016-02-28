@@ -13,7 +13,7 @@ var MinimaxProcedure = function (tree) {
 
     for (var i = 0; i < nodes.length; i += 1) {
       var node = nodes[i];
-      var maximise = node.depth % 2 === 1;
+      var maximise = node.depth() % 2 === 1;
       var parent = node.parent;
 
       if (!parent) {

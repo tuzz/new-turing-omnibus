@@ -5,13 +5,18 @@ var Node = function (position) {
 
   self.position = position;
   self.children = [];
-  self.depth = 0;
 
   self.addChild = function (child) {
     self.children.push(child);
-
     child.parent = self;
-    child.depth = self.depth + 1;
+  };
+
+  self.depth = function () {
+    if (!self.parent) {
+      return 0;
+    } else {
+      return self.parent.depth() + 1;
+    }
   };
 };
 
