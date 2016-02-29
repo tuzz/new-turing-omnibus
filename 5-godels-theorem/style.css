@@ -1,0 +1,67 @@
+body {
+  font-family: helvetica;
+  padding-left: 2em;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+.table {
+  font-size: 1.5em;
+  width: 20em;
+  margin: 2em 0;
+}
+
+.row {
+  line-height: 1.5em;
+}
+
+.row div {
+  width: 49%;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  font-weight: bold;
+}
+
+input {
+  border: 1px solid black;
+  font-size: 2em;
+  padding: 0.2em 0.3em;
+  width: 20em;
+}
+
+#formula {
+  background: #77DD77;
+}
+
+#godelNumber {
+  background: #B19CD9;
+}
+
+button {
+  font-size: 2em;
+  margin-bottom: 1em;
+  background: white;
+  border: 1px solid black;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+.label {
+  font-size: 1.5em;
+}
+
+#primeTerms {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1.2em;
+}

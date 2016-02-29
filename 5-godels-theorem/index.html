@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Gödel Numbers</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./bin/application.js"></script>
+  </head>
+  <body>
+    <h1>Gödel Numbers</h1>
+
+    <p>
+    This is a working example of Gödel numbering as applied to the formal system
+    as described in the New Turing Omnibus.
+    </p>
+
+    <p>
+    Written by Chris Patuzzo,
+    <a href="https://github.com/tuzz/new-turing-omnibus/tree/gh-pages/5-godels-theorem">
+      View the code on GitHub
+    </a>
+    </p>
+
+    <span class="label">Formula:</span>
+    <br/>
+    <input type="text" id="formula" value="(SSSSS0)"></input>
+    <button id="encode">Encode</button>
+
+    <br/>
+
+    <span class="label">Gödel Number:</span>
+    <br/>
+    <input type="text" id="godelNumber" value="219257660130416107200"></input>
+    <button id="decode">Decode</button>
+
+    <br/>
+
+    <span class="label">Prime Terms:</span>
+    <br/>
+    <span id="primeTerms">2^6 x 3^2 x 5^2 x 7^2 x 11^2 x 13^2 x 17^1 x 19^7</span>
+
+    <div class="table">
+      <div class="row">
+        <div class="header">Symbol</div>
+        <div class="header">Code Number</div>
+      </div>
+      <div class="row">
+        <div class="symbol">0</div>
+        <div class="code-number">1</div>
+      </div>
+      <div class="row">
+        <div class="symbol">S</div>
+        <div class="code-number">2</div>
+      </div>
+      <div class="row">
+        <div class="symbol">+</div>
+        <div class="code-number">3</div>
+      </div>
+      <div class="row">
+        <div class="symbol">*</div>
+        <div class="code-number">4</div>
+      </div>
+      <div class="row">
+        <div class="symbol">=</div>
+        <div class="code-number">5</div>
+      </div>
+      <div class="row">
+        <div class="symbol">(</div>
+        <div class="code-number">6</div>
+      </div>
+      <div class="row">
+        <div class="symbol">)</div>
+        <div class="code-number">7</div>
+      </div>
+      <div class="row">
+        <div class="symbol">,</div>
+        <div class="code-number">8</div>
+      </div>
+      <div class="row">
+        <div class="symbol">x</div>
+        <div class="code-number">9</div>
+      </div>
+      <div class="row">
+        <div class="symbol">1</div>
+        <div class="code-number">10</div>
+      </div>
+      <div class="row">
+        <div class="symbol">~</div>
+        <div class="code-number">11</div>
+      </div>
+      <div class="row">
+        <div class="symbol">&amp;</div>
+        <div class="code-number">12</div>
+      </div>
+      <div class="row">
+        <div class="symbol">E</div>
+        <div class="code-number">13</div>
+      </div>
+      <div class="row">
+        <div class="symbol">A</div>
+        <div class="code-number">14</div>
+      </div>
+      <div class="row">
+        <div class="symbol">&gt;</div>
+        <div class="code-number">15</div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Application();
+      app.run();
+    </script>
+  </body>
+</html>
