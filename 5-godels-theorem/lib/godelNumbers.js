@@ -39,6 +39,20 @@ var GodelNumbers = function () {
 
     encodeButton.onmousedown = encode;
     decodeButton.onmousedown = decode;
+
+    var encodeInput = document.getElementById("formula");
+    encodeInput.onkeypress = function (event) {
+      if (event.keyCode === 13) {
+        encode();
+      }
+    };
+
+    var decodeInput = document.getElementById("godelNumber");
+    decodeInput.onkeypress = function (event) {
+      if (event.keyCode === 13) {
+        decode();
+      }
+    };
   };
 
   var encode = function () {
