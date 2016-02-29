@@ -39,26 +39,30 @@ var GodelNumbers = function () {
   };
 
   var encode = function () {
-    var formula = document.getElementById("formula").value;
-    var result = encoder.encode(formula);
-    var primeTerms = result.primeTerms;
-    var termsString = primeTermsString(primeTerms);
-    var godelNumberString = result.godelNumber.toString();
+    handleErrors(function () {
+      var formula = document.getElementById("formula").value;
+      var result = encoder.encode(formula);
+      var primeTerms = result.primeTerms;
+      var termsString = primeTermsString(primeTerms);
+      var godelNumberString = result.godelNumber.toString();
 
-    document.getElementById("primeTerms").textContent = termsString;
-    document.getElementById("godelNumber").value = godelNumberString;
+      document.getElementById("primeTerms").textContent = termsString;
+      document.getElementById("godelNumber").value = godelNumberString;
+    });
   };
 
   var decode = function () {
-    var godelNumberString = document.getElementById("godelNumber").value;
-    var godelNumber = Bignum(godelNumberString);
-    var result = decoder.decode(godelNumber);
-    var primeTerms = result.primeTerms;
-    var termsString = primeTermsString(primeTerms);
-    var formula = result.formula;
+    handleErrors(function () {
+      var godelNumberString = document.getElementById("godelNumber").value;
+      var godelNumber = Bignum(godelNumberString);
+      var result = decoder.decode(godelNumber);
+      var primeTerms = result.primeTerms;
+      var termsString = primeTermsString(primeTerms);
+      var formula = result.formula;
 
-    document.getElementById("primeTerms").textContent = termsString;
-    document.getElementById("formula").value = formula;
+      document.getElementById("primeTerms").textContent = termsString;
+      document.getElementById("formula").value = formula;
+    });
   };
 
   var primeTermsString = function (primeTerms) {
@@ -71,6 +75,17 @@ var GodelNumbers = function () {
 
     return primeTermsStrings.join(" x ");
   };
+
+  var handleErrors = function (callback) {
+    var p = document.getElementsByClassName("error")[0];
+    p.textContent = "";
+
+    try {
+      callback();
+    } catch(error) {
+      p.textContent = error;
+    }
+  }
 };
 
 module.exports = GodelNumbers;
