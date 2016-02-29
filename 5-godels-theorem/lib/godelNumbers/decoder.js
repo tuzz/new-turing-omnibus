@@ -11,13 +11,21 @@ var Decoder = function (table) {
     var one = new Bignum(1);
 
     var prime = PrimeGenerator.nextPrime(0);
-    var terms = []
+    var terms = [];
+    var atLeastOnePrime = false;
 
     while (!godelNumber.eq(one)) {
       if (godelNumber.mod(prime).eq(zero)) {
         godelNumber = godelNumber.div(prime);
         terms.push(prime);
+        atLeastOnePrime = true;
       } else {
+        if (!atLeastOnePrime) {
+          var message = "Invalid Gödel number: The " + prime + " term is missing";
+          throw new Error(message);
+        }
+        atLeastOnePrime = false;
+
         prime = PrimeGenerator.nextPrime(prime);
       }
     }

@@ -34,4 +34,16 @@ describe("Decoder", function () {
 
     expect(result.formula).toEqual("S0+0+S");
   });
+
+  it("throws an error if a term is missing", function () {
+    var t1 = new Bignum(2).pow(2);
+    var t2 = new Bignum(3).pow(1);
+    var t4 = new Bignum(7).pow(1);
+
+    var godelNumber = t1.times(t2).times(t4);
+
+    expect(function () {
+      subject.decode(godelNumber);
+    }).toThrow();
+  });
 });
