@@ -73,3 +73,9 @@ p {
 a {
   color: blue;
 }
+
+#digits {
+  font-size: 1.5em;
+  padding-left: 0.5em;
+  color: brown;
+}

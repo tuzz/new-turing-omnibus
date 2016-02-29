@@ -62,9 +62,11 @@ var GodelNumbers = function () {
       var primeTerms = result.primeTerms;
       var termsString = primeTermsString(primeTerms);
       var godelNumberString = result.godelNumber.toString();
+      var digits = "(" + godelNumberString.length + " digits)";
 
       document.getElementById("primeTerms").textContent = termsString;
       document.getElementById("godelNumber").value = godelNumberString;
+      document.getElementById("digits").textContent = digits;
     });
   };
 
