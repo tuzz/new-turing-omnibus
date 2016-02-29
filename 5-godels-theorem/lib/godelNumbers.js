@@ -5,6 +5,9 @@ var Encoder = require("./godelNumbers/encoder");
 var Decoder = require("./godelNumbers/decoder");
 var Bignum = require("big.js");
 
+// We want to see the whole number (no exponents).
+Bignum.E_POS = 1000;
+
 var GodelNumbers = function () {
   var self = this;
   var encoder, decoder;
