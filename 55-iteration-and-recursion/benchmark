@@ -7,7 +7,7 @@ require "hanoi"
 
 1.upto(64) do |i|
   disks = [0] * i
-  time_taken = Benchmark.realtime { Hanoi.new.solve(disks, 1) }
+  time_taken = Benchmark.realtime { hanoi(disks, 1).first }
   puts "Time to solve #{i} disks: #{"%.3f" % time_taken} seconds"
 end
 

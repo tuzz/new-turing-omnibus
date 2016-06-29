@@ -1,18 +1,16 @@
 require "rspec"
 require "hanoi"
 
-describe Hanoi do
+describe "hanoi" do
   it "can solve the base case" do
-    result = subject.solve([0], 1)
-    output = subject.output
+    result, output = hanoi([0], 1)
 
     expect(result).to eq([1])
     expect(output).to eq(["Moving disk on peg 0 to peg 1"])
   end
 
   it "can solve the two disk problem" do
-    result = subject.solve([0, 0], 1)
-    output = subject.output
+    result, output = hanoi([0, 0], 1)
 
     expect(result).to eq([1, 1])
     expect(output).to eq([
@@ -23,8 +21,7 @@ describe Hanoi do
   end
 
   it "can solve the three disk problem" do
-    result = subject.solve([0, 0, 0], 1)
-    output = subject.output
+    result, output = hanoi([0, 0, 0], 1)
 
     expect(result).to eq([1, 1, 1])
     expect(output).to eq([

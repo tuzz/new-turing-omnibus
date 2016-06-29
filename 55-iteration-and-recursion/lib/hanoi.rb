@@ -1,30 +1,22 @@
-class Hanoi
-  attr_accessor :output
+def hanoi(disks, desired_peg, output = [])
+  peg_of_base_disk = disks.first
 
-  def initialize
-    self.output = []
-  end
+  if disks.length == 1
+    output += ["Moving disk on peg #{peg_of_base_disk} to peg #{desired_peg}"]
+    [[desired_peg], output]
+  else
+    spare_peg = ([0, 1, 2] - [peg_of_base_disk, desired_peg]).first
 
-  def solve(disks, desired_peg)
-    peg_of_base_disk = disks.first
+    # Solve for n - 1 smaller disks
+    smaller_disks, output = hanoi(disks[1..-1], spare_peg, output)
 
-    if disks.length == 1
-      output.push("Moving disk on peg #{peg_of_base_disk} to peg #{desired_peg}")
-      [desired_peg]
-    else
-      spare_peg = ([0, 1, 2] - [peg_of_base_disk, desired_peg]).first
+    output += ["Moving disk on peg #{peg_of_base_disk} to peg #{desired_peg}"]
+    peg_of_base_disk = desired_peg
 
-      # Solve for n - 1 smaller disks
-      smaller_disks = solve(disks[1..-1], spare_peg)
+    # Solve for n - 1 smaller disks
+    smaller_disks, output = hanoi(smaller_disks, desired_peg, output)
 
-      output.push("Moving disk on peg #{peg_of_base_disk} to peg #{desired_peg}")
-      peg_of_base_disk = desired_peg
-
-      # Solve for n - 1 smaller disks
-      smaller_disks = solve(smaller_disks, desired_peg)
-
-      # Return all of the disks
-      [peg_of_base_disk] + smaller_disks
-    end
+    # Return all of the disks
+    [[peg_of_base_disk] + smaller_disks, output]
   end
 end
