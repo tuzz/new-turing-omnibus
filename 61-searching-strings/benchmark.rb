@@ -1,13 +1,18 @@
 $LOAD_PATH.unshift("lib")
 
 require "searching_strings"
+require "benchmark"
 
 shakespeare = File.read("shakespeare.text")
 pattern = ARGV.first || "the question"
 text = Text.new(shakespeare)
 
 puts "Searching for '#{pattern}' in the complete works of Shakespeare..."
-matches = BoyerMoore.search(text, pattern)
+matches = nil
+
+time_taken = Benchmark.realtime do
+  matches = BoyerMoore.search(text, pattern)
+end
 
 YELLOW = "\e[33m"
 RESET = "\e[0m"
@@ -23,4 +28,5 @@ end
 
 puts "No matches found." if matches.empty?
 print "\nCompared #{text.number_of_fetches} characters of a possible #{text.length}"
-puts " (#{(text.number_of_fetches.to_f / text.length * 100).round(1)}%)"
+print " (#{(text.number_of_fetches.to_f / text.length * 100).round(1)}%)"
+puts " in #{time_taken.round(2)} seconds"
