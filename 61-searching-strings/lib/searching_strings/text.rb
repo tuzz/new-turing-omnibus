@@ -11,6 +11,10 @@ class Text
     string[index]
   end
 
+  def length
+    string.length
+  end
+
   private
 
   attr_accessor :string
