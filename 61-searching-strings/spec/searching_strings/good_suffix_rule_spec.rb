@@ -19,4 +19,8 @@ RSpec.describe GoodSuffixRule do
     subject = described_class.new("ABC")
     expect(subject.mismatch("X", 2)).to eq(1)
   end
+
+  it "does not break when there is an exact match" do
+    expect(subject.mismatch("X", -1)).to eq(1)
+  end
 end

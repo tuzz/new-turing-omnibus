@@ -8,7 +8,7 @@ class GoodSuffixRule
   end
 
   def mismatch(_char, index)
-    lookup_table[index]
+    lookup_table[index] || 1
   end
 
   private
