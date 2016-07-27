@@ -1,16 +1,30 @@
 class GoodSuffixRule
   def initialize(pattern)
-    @pattern = pattern
+    self.lookup_table = {}
+
+    pattern.length.times do |i|
+      lookup_table[i] = calculate_shift(pattern, i)
+    end
   end
 
-  def mismatch(char, index)
+  def mismatch(_char, index)
+    lookup_table[index]
+  end
+
+  private
+
+  attr_accessor :lookup_table
+
+  def calculate_shift(pattern, index)
     t = pattern[(index + 1)..-1].reverse.chars
-    remainder = pattern[0..(index - 1)].reverse.chars
+    nonterminal = pattern[0..-2].reverse.chars
 
-    remainder.length.times do |offset|
-      remainder.take(offset)
-
-      # TODO
+    nonterminal.length.times do |offset|
+      overlap = nonterminal[offset..(offset + t.length - 1)]
+      pairs = overlap.zip(t)
+      return offset if pairs.any? && pairs.all? { |(l, r)| l == r }
     end
+
+    pattern.length
   end
 end
