@@ -1,6 +1,6 @@
 class BadCharacterRule
   def initialize(pattern)
-    self.lookup_table = Hash.new { |k, v| {} }
+    self.lookup_table = {}
 
     pattern.length.times do |i|
       lookup_table[i] = {}
@@ -12,7 +12,7 @@ class BadCharacterRule
   end
 
   def mismatch(char, index)
-    lookup_table[index][char] || index + 1
+    lookup_table.dig(index, char) || index + 1
   end
 
   private
