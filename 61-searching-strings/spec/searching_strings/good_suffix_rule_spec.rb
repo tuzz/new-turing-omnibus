@@ -11,8 +11,12 @@ RSpec.describe GoodSuffixRule do
   it "skips past the pattern if no match occurs" do
     subject = described_class.new("ABC")
 
-    expect(subject.mismatch("X", 2)).to eq(3)
     expect(subject.mismatch("X", 1)).to eq(3)
     expect(subject.mismatch("X", 0)).to eq(3)
+  end
+
+  it "advances by a single character if there is no suffix" do
+    subject = described_class.new("ABC")
+    expect(subject.mismatch("X", 2)).to eq(1)
   end
 end

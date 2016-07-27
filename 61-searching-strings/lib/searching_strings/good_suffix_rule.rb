@@ -19,6 +19,8 @@ class GoodSuffixRule
     t = pattern[(index + 1)..-1].reverse.chars
     nonterminal = pattern[0..-2].reverse.chars
 
+    return 1 if t.empty?
+
     nonterminal.length.times do |offset|
       overlap = nonterminal[offset..(offset + t.length - 1)]
       pairs = overlap.zip(t)
