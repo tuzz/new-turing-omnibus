@@ -1,18 +1,18 @@
 class BadCharacterRule
   def initialize(pattern)
-    self.lookup_table = {}
+    self.lookup_table = Hash.new { |k, v| {} }
 
-    ("A".."Z").each do |char|
-      lookup_table[char] = {}
+    pattern.length.times do |i|
+      lookup_table[i] = {}
 
-      pattern.length.times do |i|
-        lookup_table[char][i] = calculate_shift(pattern, char, i)
+      pattern.chars.uniq.each do |char|
+        lookup_table[i][char] = calculate_shift(pattern, char, i)
       end
     end
   end
 
   def mismatch(char, index)
-    lookup_table[char][index]
+    lookup_table[index][char] || index + 1
   end
 
   private
@@ -22,11 +22,6 @@ class BadCharacterRule
   def calculate_shift(pattern, char, index)
     remainder = pattern[0..(index - 1)].reverse
     match = remainder.index(char)
-
-    if match
-      match + 1
-    else
-      remainder.length + 1
-    end
+    match + 1 if match
   end
 end
