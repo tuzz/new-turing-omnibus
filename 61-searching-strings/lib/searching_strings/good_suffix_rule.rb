@@ -1,32 +1,35 @@
 class GoodSuffixRule
+  attr_accessor :lookup_table
+
   def initialize(pattern)
     self.lookup_table = {}
 
-    pattern.length.times do |i|
-      lookup_table[i] = calculate_shift(pattern, i)
+    right_to_left = pattern.reverse.chars
+    remaining = right_to_left.dup
+
+    t = [remaining.shift]
+    nonterminal = right_to_left[1..-1]
+    i = 0
+
+    while i < pattern.length && t.length <= pattern.length do
+      overlap = nonterminal[i..(i + t.length - 1)]
+      pairs = overlap.zip(t)
+      all_match = pairs.any? && pairs.all? { |(l, r)| l == r }
+
+      if all_match
+        lookup_table[pattern.length - t.length - 1] = i + 1
+        t.push(remaining.shift)
+      else
+        i += 1
+      end
+    end
+
+    (pattern.length - 1).times do |j|
+      lookup_table[j] ||= pattern.length
     end
   end
 
   def mismatch(_char, index)
-    lookup_table[index] || 1
-  end
-
-  private
-
-  attr_accessor :lookup_table
-
-  def calculate_shift(pattern, index)
-    t = pattern[(index + 1)..-1].reverse.chars
-    nonterminal = pattern[0..-2].reverse.chars
-
-    return 1 if t.empty?
-
-    nonterminal.length.times do |offset|
-      overlap = nonterminal[offset..(offset + t.length - 1)]
-      pairs = overlap.zip(t)
-      return offset if pairs.any? && pairs.all? { |(l, r)| l == r }
-    end
-
-    pattern.length
+    lookup_table.fetch(index, 1)
   end
 end
