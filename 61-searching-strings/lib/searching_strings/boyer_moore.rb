@@ -9,7 +9,6 @@ module BoyerMoore
     pattern = pattern.chars
 
     position = 0
-    memo = {}
     matches = []
 
     while position < text.length - pattern.length do
@@ -18,10 +17,7 @@ module BoyerMoore
       char = nil
 
       while j >= 0 do
-        unless memo.key?(i)
-          memo[i] = text.fetch(i)
-        end
-        char = memo[i]
+        char = text.fetch(i)
 
         if char == pattern[j]
           matches.push(i) if j.zero?
