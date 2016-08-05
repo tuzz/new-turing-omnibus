@@ -27,4 +27,19 @@ RSpec.describe BoyerMoore do
     expect(text.number_of_fetches).to be < text.length,
       "The number of comparisons was not sub-linear"
   end
+
+
+  it "finds matches in a regular String" do
+    text = "NEEDELELNNENEEDLEINAHAYNEEEDNEEDLEEHSTACK"
+    matches = described_class.search(text, "NEEDLE")
+
+    expect(matches).to eq([11, 28])
+  end
+
+  it "finds matches in an Array of characters" do
+    text = "NEEDELELNNENEEDLEINAHAYNEEEDNEEDLEEHSTACK".chars
+    matches = described_class.search(text, "NEEDLE")
+
+    expect(matches).to eq([11, 28])
+  end
 end

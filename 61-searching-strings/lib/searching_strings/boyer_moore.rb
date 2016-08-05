@@ -5,6 +5,9 @@ module BoyerMoore
     bad_character_rule = BadCharacterRule.new(pattern)
     good_suffix_rule = GoodSuffixRule.new(pattern)
 
+    text = text.chars if text.respond_to?("chars")
+    pattern = pattern.chars
+
     position = 0
     memo = {}
     matches = []
