@@ -29,4 +29,4 @@ end
 puts "No matches found." if matches.empty?
 print "\nCompared #{text.number_of_fetches} characters of a possible #{text.length}"
 print " (#{(text.number_of_fetches.to_f / text.length * 100).round(1)}%)"
-puts " in #{time_taken.round(2)} seconds"
+puts " in #{time_taken.round(5)} seconds"
