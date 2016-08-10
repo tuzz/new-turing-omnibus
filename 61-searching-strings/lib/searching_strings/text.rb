@@ -2,7 +2,7 @@ class Text
   attr_reader :number_of_fetches
 
   def initialize(string)
-    self.string = string
+    self.string = string.chars
     self.number_of_fetches = 0
   end
 
