@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Minimum Spanning Trees</title>
+    <script src="bundle.js"></script>
+    <style>
+      body { font-family: Helvetica, sans-serif; }
+      #controls { position: absolute; top: 0; }
+      a { color: blue; }
+      li { margin-top: 0.5em; }
+    </style>
+  </head>
+  <body>
+    <ul id="controls">
+      <li><a href="">new graph</a></li>
+      <li><a href="" id="more-nodes">more</a> / <a href="" id="fewer-nodes">fewer</a> nodes</li>
+      <li><a href="" id="more-edges">more</a> / <a href="" id="fewer-edges">fewer</a> edges</li>
+      <li>go <a href="" id="faster">faster</a> / <a href="" id="slower">slower</a></li>
+      <li><a href="?">reset</a> to defaults</li>
+    </ul>
+
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <script>new App().run();</script>
+  </body>
+</html>
