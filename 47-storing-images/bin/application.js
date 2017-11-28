@@ -768,16 +768,13 @@ var View = function (canvasId, playerCallback) {
 
     if (result === 1) {
       text = "Expertly handled. A safe landing!";
+      drawImage("cocktail.png");
     } else if (result === 0) {
       text = "It was close, but you made it!";
+      drawImage("cocktail.png");
     } else if (result === -1) {
       text = "You missed. Now you're shark food.";
-
-      var image = new Image();
-      image.onload = function() {
-        context.drawImage(image, 190, 205);
-      };
-      image.src = "shark.jpg";
+      drawImage("shark.jpg");
     } else {
       return;
     }
@@ -785,6 +782,14 @@ var View = function (canvasId, playerCallback) {
     context.font = "50px Arial";
     context.fillStyle = color;
     context.fillText(text, x, y);
+  };
+
+  var drawImage = function (src) {
+    var image = new Image();
+    image.onload = function() {
+      context.drawImage(image, 190, 205);
+    };
+    image.src = src;
   };
 
   self.won = function () {
